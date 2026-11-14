@@ -133,7 +133,7 @@ const arabic = {
   'Plateau Plus': 'بلاتو بلس', Cofans: 'كوفانس',
   'He edits our challenge videos with the right rhythm and energy. We send the footage and get back something ready to post.': 'يمنتج فيديوهات التحديات مالتنا بإيقاع وحماس مضبوط. ندزله التصوير ويرجعلنا فيديو جاهز للنشر.',
   'Mute sound': 'كتم الصوت', 'Turn sound on': 'تشغيل الصوت', 'and many more': 'وغيرها هواي',
-  'Solar for farming': 'طاقة شمسية للزراعة', 'Play solar for farming': 'تشغيل فيديو الطاقة الشمسية للزراعة',
+  'Solar for farming': 'طاقة شمسية للمزرعة', 'Play solar for farming': 'تشغيل فيديو الطاقة الشمسية للمزرعة',
   'Educational content': 'مقطع تعليمي', 'Play educational content': 'تشغيل المقطع التعليمي',
   'Your next project,': 'لنتحدث عن', 'let’s talk.': 'مشروعك القادم',
   'I’m a freelance editor and social media manager based in Najaf, Iraq. I have around three years of experience working with businesses on video, content and campaigns.': 'أنا محرر فيديو مستقل ومدير حسابات تواصل اجتماعي من النجف، العراق. لدي نحو ثلاث سنوات من الخبرة في مونتاج الفيديو وإنتاج المحتوى وإدارة الحملات للشركات.',
