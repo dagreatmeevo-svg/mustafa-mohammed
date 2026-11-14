@@ -413,3 +413,10 @@ html[lang="ar"] :is(.case-stats dd, .service-no) { direction: ltr; unicode-bidi:
 @media (max-width: 1050px) { .voices { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 600px) { .voices { grid-template-columns: 1fr; } }
 html[lang="ar"] .voice blockquote p { line-height: 1.9; }
+
+/* Sound toggle on the active reel. */
+.reel { position: relative; }
+.sound-toggle { position: absolute; z-index: 3; top: .8rem; right: .8rem; display: grid; place-items: center; width: 2.6rem; height: 2.6rem; padding: 0; border: 0; border-radius: 50%; background: #21142dcc; color: #fff; backdrop-filter: blur(6px); }
+.sound-toggle svg { width: 1.35rem; height: 1.35rem; }
+@media (hover: hover) { .sound-toggle:hover { background: var(--mint); color: var(--plum); } }
+.toolkit ul { gap: .5rem; }

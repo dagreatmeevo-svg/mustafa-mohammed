@@ -9,7 +9,34 @@ const previewToggle = document.querySelector('.preview-toggle');
 const counter = document.querySelector('.gallery-count');
 const progress = document.querySelector('.gallery-progress span');
 const preview = document.createElement('video');
-preview.muted = true;
+preview.muted = false;
+// Sound is on by default. Browsers refuse sound before the visitor's first tap or key press,
+// so the preview starts muted in that case and unmutes on the first interaction.
+let soundWanted = true;
+let soundBlocked = false;
+const ICON_ON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.500h3.500L12 5.500v13l-4.500-4H4Z" fill="currentColor"/><path d="M15.500 9a4.200 4.200 0 0 1 0 6M18 6.500a7.800 7.800 0 0 1 0 11" fill="none" stroke="currentColor" stroke-width="1.800" stroke-linecap="round"/></svg>';
+const ICON_OFF = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.500h3.500L12 5.500v13l-4.500-4H4Z" fill="currentColor"/><path d="m15.500 9.500 5 5m0-5-5 5" fill="none" stroke="currentColor" stroke-width="1.800" stroke-linecap="round"/></svg>';
+const soundButton = document.createElement('button');
+soundButton.type = 'button';
+soundButton.className = 'sound-toggle';
+function updateSoundButton() {
+  const audible = !preview.muted;
+  soundButton.innerHTML = audible ? ICON_ON : ICON_OFF;
+  soundButton.setAttribute('aria-label', translate(audible ? 'Mute sound' : 'Turn sound on'));
+  soundButton.setAttribute('aria-pressed', String(audible));
+}
+soundButton.addEventListener('click', event => {
+  event.stopPropagation();
+  soundBlocked = false;
+  soundWanted = preview.muted;
+  preview.muted = !soundWanted;
+  updateSoundButton();
+});
+const unlockSound = () => {
+  soundBlocked = false;
+  if (soundWanted && preview.muted) { preview.muted = false; updateSoundButton(); }
+};
+['pointerdown', 'keydown', 'touchend'].forEach(type => document.addEventListener(type, unlockSound, { once: true }));
 preview.loop = true;
 preview.playsInline = true;
 preview.preload = 'none';
@@ -30,11 +57,19 @@ function updatePlayback() {
   previewToggle.setAttribute('aria-label', translate(previewEnabled ? 'Pause video preview' : 'Play video preview'));
   previewToggle.setAttribute('aria-pressed', String(previewEnabled));
   if (playing && preview.getAttribute('src')) {
+    preview.muted = !soundWanted || soundBlocked;
     preview.play().catch(error => {
       if (error.name !== 'NotAllowedError') return;
+      if (!preview.muted) {
+        soundBlocked = true;
+        preview.muted = true;
+        updateSoundButton();
+        return preview.play().catch(() => { previewEnabled = false; updatePlayback(); });
+      }
       previewEnabled = false;
       updatePlayback();
     });
+    updateSoundButton();
   } else {
     preview.pause();
   }
@@ -51,6 +86,7 @@ function selectCard(index) {
   clearTimeout(loadTimer);
   preview.pause();
   preview.remove();
+  soundButton.remove();
   const button = cards[index].querySelector('.reel-preview');
   previewToggle.disabled = !button;
   if (!button) return;
@@ -58,6 +94,7 @@ function selectCard(index) {
     preview.src = button.dataset.video;
     preview.poster = button.querySelector('img').src;
     button.append(preview);
+    button.after(soundButton);
     updatePlayback();
   }, 220);
 }
@@ -173,7 +210,7 @@ previewToggle.addEventListener('click', () => {
   updatePlayback();
 });
 document.addEventListener('visibilitychange', updatePlayback);
-document.addEventListener('portfolio:languagechange', updatePlayback);
+document.addEventListener('portfolio:languagechange', () => { updatePlayback(); updateSoundButton(); });
 reducedMotion.addEventListener('change', () => {
   previewEnabled = !reducedMotion.matches;
   updatePlayback();

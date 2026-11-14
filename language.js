@@ -132,6 +132,7 @@ const arabic = {
   'Mustafa manages our ads, our contracts and any other service we need as a solar panel company. We can rely on him for all of it.': 'مصطفى يدير إعلاناتنا وعقودنا وأي خدمة ثانية نحتاجها كشركة ألواح طاقة شمسية. نعتمد عليه بكلشي.',
   'Plateau Plus': 'بلاتو بلس', Cofans: 'كوفانس',
   'He edits our challenge videos with the right rhythm and energy. We send the footage and get back something ready to post.': 'يمنتج فيديوهات التحديات مالتنا بإيقاع وحماس مضبوط. ندزله التصوير ويرجعلنا فيديو جاهز للنشر.',
+  'Mute sound': 'كتم الصوت', 'Turn sound on': 'تشغيل الصوت', 'and many more': 'وغيرها هواي',
   'Your next project,': 'لنتحدث عن', 'let’s talk.': 'مشروعك القادم',
   'I’m a freelance editor and social media manager based in Najaf, Iraq. I have around three years of experience working with businesses on video, content and campaigns.': 'أنا محرر فيديو مستقل ومدير حسابات تواصل اجتماعي من النجف، العراق. لدي نحو ثلاث سنوات من الخبرة في مونتاج الفيديو وإنتاج المحتوى وإدارة الحملات للشركات.',
   'Download CV ↓': 'تحميل السيرة الذاتية ↓', 'Mustafa Mohammed': 'مصطفى محمد',
